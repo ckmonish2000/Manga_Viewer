@@ -3,11 +3,13 @@ import actions from "@api/books"
 import { IBooks } from '@models/books'
 import Comic from '@components/Comic'
 import RootContext from './RootContext'
+import { IChapter } from '@models/chapters'
 
 
 function App() {
   const [books, setBooks] = useState<IBooks[]>([])
   const [currentBook, setCurrentBook] = useState<number|null>(null)
+  const [chapter, setChapter] = useState<IChapter[]>([])
  
   const getInitState = async ()=>{
     const booksReq = await actions.getAllBooks()
