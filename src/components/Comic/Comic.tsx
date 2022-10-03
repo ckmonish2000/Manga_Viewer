@@ -1,13 +1,18 @@
+import {useContext,useState} from 'react'
 import RootContext from '@components/App/RootContext'
 import { IContext } from '@models/RootContext'
-import {useContext} from 'react'
-import { Button, Column, Row } from './styles'
 import { IBooks } from '@models/books';
+import actions from "@api/books"
+import { Button, Column, Row } from './styles'
+import { IPage } from '@models/chapters';
 
 export const Comic = () => {
-  const {books,setCurrentBook,currentBook} = useContext<IContext>(RootContext)
-  const {chapter_ids} = books[books.findIndex(v=>v.id === currentBook)]
-  
+  const [currentPgId, setcurrentPgId] = useState(0)
+  const {books,setCurrentBook,currentBook,setChapter,chapter,currentChapId,setCurrentChapId} = useContext<IContext>(RootContext)
+  const chapterData =  books[books?.findIndex(v=>v?.id === currentBook)]
+  const pages:IPage[] = chapter.pages
+
+  console.log(pages[currentPgId].image.file)
   return (
     <Column>
     {/* header */}
@@ -22,10 +27,18 @@ export const Comic = () => {
     </Row>
   
     <br/>
-    {/* pagination */}
+    {/* chapter pagination */}
     <Row>
-    {chapter_ids.map(v=><Button paging>{v}</Button>)}
+    {chapterData?.chapter_ids.map((v)=><Button paging active={v===currentChapId} onClick={async ()=>{
+      const chapter = await actions.getChapterDetails(v)
+      setCurrentChapId(v)
+      setChapter(chapter.data)
+      }}>{v}</Button>)}
     </Row>
+    
+    <img src={pages[currentPgId].image.file}/>
+    
+
     </Column>
   )
 }
