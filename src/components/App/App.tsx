@@ -5,17 +5,6 @@ import Comic from '@components/Comic'
 import RootContext from './RootContext'
 import { IChapter } from '@models/chapters'
 
-const initChapters = {
-  id: -1,
-  title: "",
-  book: {
-      id: -1,
-      title: "",
-      chapter_ids: [],
-  },
-  chapter_index: -1,
-  pages: [],
-}
 
 function App() {
   const [books, setBooks] = useState<IBooks[]>([])
@@ -47,6 +36,20 @@ function App() {
       <Comic/>
     </RootContext.Provider>
   )
+}
+
+
+
+const initChapters = {
+  id: -1,
+  title: "",
+  book: {
+      id: -1,
+      title: "",
+      chapter_ids: [],
+  },
+  chapter_index: -1,
+  pages: [],
 }
 
 export default App

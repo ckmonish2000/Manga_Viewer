@@ -6,11 +6,11 @@ export const Column = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export const Row = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -33,3 +33,31 @@ export const Button = styled.button<buttonProp>`
   height: ${props=>props.paging ? "30px":""};
 `;
 
+
+export const Image = styled.img`
+    width: 550px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-aspect-ratio: 1/1){
+      width: 90%;
+    }
+`
+
+export const Relative = styled.div`
+  position: relative;
+`
+
+export const InvisbleButton = styled.button<{pos?:string}>`
+    position: absolute;
+    left: ${props=>props.pos==="left"?"0px":""};
+    right: ${props=>props.pos==="right"?"0px":""};
+    width: 50%;
+    height: 100%;
+    background: none;
+    color: transparent;
+    border: 0px;
+    outline: 0px;
+`
